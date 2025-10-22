@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode, useState, Fragment } from 'react';
+import { PropsWithChildren, ReactNode, useState, Fragment, useEffect } from 'react';
 import { Link, usePage, router } from '@inertiajs/react';
 import { User } from '@/types';
 import {
@@ -12,6 +12,8 @@ import {
     ArrowRightOnRectangleIcon,
     UserCircleIcon,
     ChevronDownIcon,
+    SunIcon,
+    MoonIcon,
 } from '@heroicons/react/24/outline';
 import { Menu, Transition } from '@headlessui/react';
 
@@ -30,6 +32,32 @@ interface MenuItem {
 export default function DashboardLayout({ header, children }: PropsWithChildren<DashboardLayoutProps>) {
     const user = usePage().props.auth.user as User;
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [darkMode, setDarkMode] = useState(false);
+
+    // Initialize dark mode from localStorage
+    useEffect(() => {
+        const isDark = localStorage.getItem('darkMode') === 'true' || 
+                      (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        setDarkMode(isDark);
+        if (isDark) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, []);
+
+    // Toggle dark mode
+    const toggleDarkMode = () => {
+        const newDarkMode = !darkMode;
+        setDarkMode(newDarkMode);
+        localStorage.setItem('darkMode', String(newDarkMode));
+        
+        if (newDarkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    };
 
     const navigation: MenuItem[] = [
         { name: 'Dashboard', href: route('dashboard'), icon: HomeIcon },
@@ -144,6 +172,18 @@ export default function DashboardLayout({ header, children }: PropsWithChildren<
                             )}
                         </div>
                         <div className="ml-4 flex items-center md:ml-6 space-x-4">
+                            <button 
+                                onClick={toggleDarkMode}
+                                className="rounded-full p-1 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 transition-colors"
+                                title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                            >
+                                {darkMode ? (
+                                    <SunIcon className="h-6 w-6" />
+                                ) : (
+                                    <MoonIcon className="h-6 w-6" />
+                                )}
+                            </button>
+                            
                             <button className="rounded-full p-1 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300">
                                 <BellIcon className="h-6 w-6" />
                             </button>

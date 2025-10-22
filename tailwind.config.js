@@ -10,6 +10,8 @@ export default {
         './resources/js/**/*.tsx',
     ],
 
+    darkMode: 'class', // Enable dark mode with class strategy
+
     theme: {
         extend: {
             fontFamily: {
