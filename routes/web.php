@@ -27,6 +27,11 @@ Route::middleware('auth')->group(function () {
     // Users Management
     Route::get('/users', [UsersController::class, 'index'])->name('users.index');
     
+    // Components Showcase
+    Route::get('/components', function () {
+        return Inertia::render('Components');
+    })->name('components.index');
+    
     // Settings
     Route::get('/settings', function () {
         return Inertia::render('Settings');
