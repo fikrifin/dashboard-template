@@ -16,6 +16,8 @@ import {
     MoonIcon,
     SwatchIcon,
     SparklesIcon,
+    ChevronDoubleLeftIcon,
+    ChevronDoubleRightIcon,
 } from '@heroicons/react/24/outline';
 import { Menu, Transition } from '@headlessui/react';
 
@@ -34,6 +36,7 @@ interface MenuItem {
 export default function DashboardLayout({ header, children }: PropsWithChildren<DashboardLayoutProps>) {
     const user = usePage().props.auth.user as User;
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [sidebarMinimized, setSidebarMinimized] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
 
     // Sample notifications - in real app, this would come from props or API
@@ -154,24 +157,50 @@ export default function DashboardLayout({ header, children }: PropsWithChildren<
             </div>
 
             {/* Desktop sidebar */}
-            <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
+            <div className={`hidden lg:fixed lg:inset-y-0 lg:flex lg:flex-col transition-all duration-300 ease-in-out ${
+                sidebarMinimized ? 'lg:w-20' : 'lg:w-64'
+            }`}>
                 <div className="flex flex-col flex-grow bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 overflow-y-auto">
-                    <div className="flex h-16 items-center px-4 border-b border-gray-200 dark:border-gray-700">
-                        <span className="text-xl font-bold text-gray-900 dark:text-white">Dashboard</span>
+                    <div className={`flex h-16 items-center border-b border-gray-200 dark:border-gray-700 ${
+                        sidebarMinimized ? 'justify-center px-2' : 'justify-between px-4'
+                    }`}>
+                        {!sidebarMinimized && (
+                            <span className="text-xl font-bold text-gray-900 dark:text-white">
+                                Dashboard
+                            </span>
+                        )}
+                        <button
+                            onClick={() => setSidebarMinimized(!sidebarMinimized)}
+                            className="p-1.5 rounded-md text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex-shrink-0"
+                            title={sidebarMinimized ? 'Expand sidebar' : 'Collapse sidebar'}
+                        >
+                            {sidebarMinimized ? (
+                                <ChevronDoubleRightIcon className="h-5 w-5" />
+                            ) : (
+                                <ChevronDoubleLeftIcon className="h-5 w-5" />
+                            )}
+                        </button>
                     </div>
                     <nav className="flex-1 space-y-1 px-2 py-4">
                         {navigation.map((item) => (
                             <Link
                                 key={item.name}
                                 href={item.href}
-                                className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md ${
+                                className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
                                     isCurrentRoute(item.href)
                                         ? 'bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-white'
                                         : 'text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700'
-                                }`}
+                                } ${sidebarMinimized ? 'justify-center' : ''}`}
+                                title={sidebarMinimized ? item.name : ''}
                             >
-                                <item.icon className="mr-3 h-6 w-6 flex-shrink-0" />
-                                {item.name}
+                                <item.icon className={`h-6 w-6 flex-shrink-0 transition-all duration-200 ${
+                                    sidebarMinimized ? 'mr-0' : 'mr-3'
+                                }`} />
+                                <span className={`transition-all duration-300 ${
+                                    sidebarMinimized ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100'
+                                }`}>
+                                    {item.name}
+                                </span>
                             </Link>
                         ))}
                     </nav>
@@ -179,17 +208,28 @@ export default function DashboardLayout({ header, children }: PropsWithChildren<
                     <div className="border-t border-gray-200 dark:border-gray-700 p-4">
                         <button
                             onClick={handleLogout}
-                            className="group flex w-full items-center px-2 py-2 text-sm font-medium rounded-md text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20"
+                            className={`group flex w-full items-center px-2 py-2 text-sm font-medium rounded-md text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 transition-all duration-200 ${
+                                sidebarMinimized ? 'justify-center' : ''
+                            }`}
+                            title={sidebarMinimized ? 'Logout' : ''}
                         >
-                            <ArrowRightOnRectangleIcon className="mr-3 h-6 w-6 flex-shrink-0" />
-                            Logout
+                            <ArrowRightOnRectangleIcon className={`h-6 w-6 flex-shrink-0 transition-all duration-200 ${
+                                sidebarMinimized ? 'mr-0' : 'mr-3'
+                            }`} />
+                            <span className={`transition-all duration-300 ${
+                                sidebarMinimized ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100'
+                            }`}>
+                                Logout
+                            </span>
                         </button>
                     </div>
                 </div>
             </div>
 
             {/* Main content */}
-            <div className="lg:pl-64 flex flex-col flex-1">
+            <div className={`lg:flex lg:flex-col lg:flex-1 transition-all duration-300 ease-in-out ${
+                sidebarMinimized ? 'lg:pl-20' : 'lg:pl-64'
+            }`}>
                 {/* Top navbar */}
                 <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white dark:bg-gray-800 shadow">
                     <button
