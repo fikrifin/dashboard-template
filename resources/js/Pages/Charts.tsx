@@ -111,9 +111,9 @@ export default function Charts() {
                                     height={250}
                                 />
                             </div>
-                            <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                                <code className="text-sm text-gray-800 dark:text-gray-200">
-                                    {`<LineChart
+                            <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg overflow-x-auto">
+                                <pre className="text-sm text-gray-800 dark:text-gray-200">
+                                    <code>{`<LineChart
   data={{
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     values: [4500, 5200, 4800, 6100, 5900, 6800]
@@ -121,8 +121,8 @@ export default function Charts() {
   title="Monthly Revenue"
   color="#6366f1"
   height={250}
-/>`}
-                                </code>
+/>`}</code>
+                                </pre>
                             </div>
                         </Card>
 
@@ -142,9 +142,9 @@ export default function Charts() {
                                     height={250}
                                 />
                             </div>
-                            <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                                <code className="text-sm text-gray-800 dark:text-gray-200">
-                                    {`<BarChart
+                            <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg overflow-x-auto">
+                                <pre className="text-sm text-gray-800 dark:text-gray-200">
+                                    <code>{`<BarChart
   data={{
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     values: [120, 150, 180, 140, 200, 170, 160]
@@ -152,8 +152,8 @@ export default function Charts() {
   title="Weekly Sales"
   color="#8b5cf6"
   height={250}
-/>`}
-                                </code>
+/>`}</code>
+                                </pre>
                             </div>
                         </Card>
 
@@ -173,9 +173,9 @@ export default function Charts() {
                                     centerSubtext="Total Visits"
                                 />
                             </div>
-                            <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                                <code className="text-sm text-gray-800 dark:text-gray-200">
-                                    {`<DonutChart
+                            <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg overflow-x-auto">
+                                <pre className="text-sm text-gray-800 dark:text-gray-200">
+                                    <code>{`<DonutChart
   data={[
     { label: 'Direct', value: 4200, color: '#6366f1' },
     { label: 'Social Media', value: 3100, color: '#8b5cf6' }
@@ -183,8 +183,8 @@ export default function Charts() {
   title="Traffic Sources"
   centerText="11.6K"
   centerSubtext="Total Visits"
-/>`}
-                                </code>
+/>`}</code>
+                                </pre>
                             </div>
                         </Card>
 
@@ -195,9 +195,9 @@ export default function Charts() {
                                 title="Revenue vs Expenses"
                                 height={280}
                             />
-                            <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                                <code className="text-sm text-gray-800 dark:text-gray-200">
-                                    {`<AreaChart
+                            <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg overflow-x-auto">
+                                <pre className="text-sm text-gray-800 dark:text-gray-200">
+                                    <code>{`<AreaChart
   data={{
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [
@@ -214,8 +214,8 @@ export default function Charts() {
     ]
   }}
   height={280}
-/>`}
-                                </code>
+/>`}</code>
+                                </pre>
                             </div>
                         </Card>
 
@@ -270,14 +270,14 @@ export default function Charts() {
                                     <Sparkline data={sparklineData3} color="#6366f1" height={40} />
                                 </div>
                             </div>
-                            <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                                <code className="text-sm text-gray-800 dark:text-gray-200">
-                                    {`<Sparkline 
+                            <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg overflow-x-auto">
+                                <pre className="text-sm text-gray-800 dark:text-gray-200">
+                                    <code>{`<Sparkline 
   data={[20, 35, 30, 45, 40, 50, 48, 60, 55, 65]} 
   color="#10b981" 
   height={40} 
-/>`}
-                                </code>
+/>`}</code>
+                                </pre>
                             </div>
                         </Card>
 

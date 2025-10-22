@@ -62,10 +62,10 @@ export default function Components() {
                         <Button variant="primary" size="sm">Small Button</Button>
                         <Button variant="primary" size="lg">Large Button</Button>
                     </div>
-                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                        <code className="text-sm text-gray-800 dark:text-gray-200">
-                            {`<Button variant="primary">Primary Button</Button>`}
-                        </code>
+                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg overflow-x-auto">
+                        <pre className="text-sm text-gray-800 dark:text-gray-200">
+                            <code>{`<Button variant="primary">Primary Button</Button>`}</code>
+                        </pre>
                     </div>
                 </Card>
 
@@ -79,10 +79,10 @@ export default function Components() {
                         <Badge variant="warning">Warning</Badge>
                         <Badge variant="danger">Danger</Badge>
                     </div>
-                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                        <code className="text-sm text-gray-800 dark:text-gray-200">
-                            {`<Badge variant="success">Success</Badge>`}
-                        </code>
+                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg overflow-x-auto">
+                        <pre className="text-sm text-gray-800 dark:text-gray-200">
+                            <code>{`<Badge variant="success">Success</Badge>`}</code>
+                        </pre>
                     </div>
                 </Card>
 
@@ -102,10 +102,10 @@ export default function Components() {
                             This is an info alert message.
                         </Alert>
                     </div>
-                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                        <code className="text-sm text-gray-800 dark:text-gray-200">
-                            {`<Alert type="success" title="Success!">Message here</Alert>`}
-                        </code>
+                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg overflow-x-auto">
+                        <pre className="text-sm text-gray-800 dark:text-gray-200">
+                            <code>{`<Alert type="success" title="Success!">Message here</Alert>`}</code>
+                        </pre>
                     </div>
                 </Card>
 
@@ -140,10 +140,10 @@ export default function Components() {
                             subtitle="vs last month"
                         />
                     </div>
-                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                        <code className="text-sm text-gray-800 dark:text-gray-200">
-                            {`<StatCard title="Total Users" value="1,234" icon={UserIcon} ... />`}
-                        </code>
+                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg overflow-x-auto">
+                        <pre className="text-sm text-gray-800 dark:text-gray-200">
+                            <code>{`<StatCard title="Total Users" value="1,234" icon={UserIcon} ... />`}</code>
+                        </pre>
                     </div>
                 </Card>
 
@@ -301,10 +301,10 @@ export default function Components() {
                 {/* Table Section */}
                 <Card title="Table" subtitle="Data table with custom rendering">
                     <Table columns={tableColumns} data={tableData} />
-                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                        <code className="text-sm text-gray-800 dark:text-gray-200">
-                            {`<Table columns={columns} data={data} />`}
-                        </code>
+                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg overflow-x-auto">
+                        <pre className="text-sm text-gray-800 dark:text-gray-200">
+                            <code>{`<Table columns={columns} data={data} />`}</code>
+                        </pre>
                     </div>
                 </Card>
 
@@ -314,10 +314,10 @@ export default function Components() {
                         title="No data found"
                         description="There are no items to display at the moment."
                     />
-                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                        <code className="text-sm text-gray-800 dark:text-gray-200">
-                            {`<EmptyState title="No data" description="..." />`}
-                        </code>
+                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg overflow-x-auto">
+                        <pre className="text-sm text-gray-800 dark:text-gray-200">
+                            <code>{`<EmptyState title="No data" description="..." />`}</code>
+                        </pre>
                     </div>
                 </Card>
 
