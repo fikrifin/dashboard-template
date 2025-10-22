@@ -94,7 +94,7 @@ export default function DashboardLayout({ header, children }: PropsWithChildren<
         { name: 'Dashboard', href: route('dashboard'), icon: HomeIcon },
         { name: 'Users', href: route('users.index'), icon: UsersIcon },
         { name: 'Components', href: route('components.index'), icon: SwatchIcon },
-        { name: 'Analytics', href: '#', icon: ChartBarIcon },
+        { name: 'Charts', href: route('charts.index'), icon: ChartBarIcon },
         { name: 'Settings', href: route('settings.index'), icon: CogIcon },
     ];
 

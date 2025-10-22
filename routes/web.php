@@ -32,6 +32,11 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Components');
     })->name('components.index');
     
+    // Charts & Analytics
+    Route::get('/charts', function () {
+        return Inertia::render('Charts');
+    })->name('charts.index');
+    
     // Settings
     Route::get('/settings', function () {
         return Inertia::render('Settings');
