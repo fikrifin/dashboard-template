@@ -34,6 +34,36 @@ export default function DashboardLayout({ header, children }: PropsWithChildren<
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
 
+    // Sample notifications - in real app, this would come from props or API
+    const notifications = [
+        {
+            id: 1,
+            title: 'New user registered',
+            message: 'John Doe just signed up for an account',
+            time: '5 minutes ago',
+            read: false,
+            type: 'user',
+        },
+        {
+            id: 2,
+            title: 'System update',
+            message: 'Dashboard has been updated to version 2.0',
+            time: '1 hour ago',
+            read: false,
+            type: 'system',
+        },
+        {
+            id: 3,
+            title: 'New comment',
+            message: 'Jane Smith commented on your post',
+            time: '2 hours ago',
+            read: true,
+            type: 'comment',
+        },
+    ];
+
+    const unreadCount = notifications.filter(n => !n.read).length;
+
     // Initialize dark mode from localStorage
     useEffect(() => {
         const isDark = localStorage.getItem('darkMode') === 'true' || 
@@ -184,9 +214,121 @@ export default function DashboardLayout({ header, children }: PropsWithChildren<
                                 )}
                             </button>
                             
-                            <button className="rounded-full p-1 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300">
-                                <BellIcon className="h-6 w-6" />
-                            </button>
+                            {/* Notification dropdown */}
+                            <Menu as="div" className="relative">
+                                <Menu.Button className="relative rounded-full p-1 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 transition-colors">
+                                    <BellIcon className="h-6 w-6" />
+                                    {unreadCount > 0 && (
+                                        <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-gray-800"></span>
+                                    )}
+                                </Menu.Button>
+
+                                <Transition
+                                    as={Fragment}
+                                    enter="transition ease-out duration-100"
+                                    enterFrom="transform opacity-0 scale-95"
+                                    enterTo="transform opacity-100 scale-100"
+                                    leave="transition ease-in duration-75"
+                                    leaveFrom="transform opacity-100 scale-100"
+                                    leaveTo="transform opacity-0 scale-95"
+                                >
+                                    <Menu.Items className="absolute right-0 z-10 mt-2 w-80 origin-top-right rounded-lg bg-white dark:bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none border border-gray-200 dark:border-gray-700">
+                                        <div className="py-1">
+                                            {/* Header */}
+                                            <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                                                <div className="flex items-center justify-between">
+                                                    <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
+                                                        Notifications
+                                                    </h3>
+                                                    {unreadCount > 0 && (
+                                                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200">
+                                                            {unreadCount} new
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            </div>
+
+                                            {/* Notifications list */}
+                                            <div className="max-h-96 overflow-y-auto">
+                                                {notifications.length > 0 ? (
+                                                    notifications.map((notification) => (
+                                                        <Menu.Item key={notification.id}>
+                                                            {({ active }) => (
+                                                                <a
+                                                                    href="#"
+                                                                    className={`${
+                                                                        active ? 'bg-gray-50 dark:bg-gray-700' : ''
+                                                                    } ${
+                                                                        !notification.read ? 'bg-indigo-50 dark:bg-indigo-900/20' : ''
+                                                                    } block px-4 py-3 border-b border-gray-100 dark:border-gray-700 last:border-b-0`}
+                                                                >
+                                                                    <div className="flex items-start">
+                                                                        <div className="flex-shrink-0">
+                                                                            <div className={`h-8 w-8 rounded-full flex items-center justify-center ${
+                                                                                notification.type === 'user' ? 'bg-blue-100 dark:bg-blue-900' :
+                                                                                notification.type === 'system' ? 'bg-green-100 dark:bg-green-900' :
+                                                                                'bg-purple-100 dark:bg-purple-900'
+                                                                            }`}>
+                                                                                <span className={`text-sm font-medium ${
+                                                                                    notification.type === 'user' ? 'text-blue-600 dark:text-blue-400' :
+                                                                                    notification.type === 'system' ? 'text-green-600 dark:text-green-400' :
+                                                                                    'text-purple-600 dark:text-purple-400'
+                                                                                }`}>
+                                                                                    {notification.type === 'user' ? '👤' :
+                                                                                     notification.type === 'system' ? '⚙️' : '💬'}
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="ml-3 flex-1">
+                                                                            <p className={`text-sm font-medium ${
+                                                                                !notification.read 
+                                                                                    ? 'text-gray-900 dark:text-white' 
+                                                                                    : 'text-gray-700 dark:text-gray-300'
+                                                                            }`}>
+                                                                                {notification.title}
+                                                                            </p>
+                                                                            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                                                                {notification.message}
+                                                                            </p>
+                                                                            <p className="mt-1 text-xs text-gray-400 dark:text-gray-500">
+                                                                                {notification.time}
+                                                                            </p>
+                                                                        </div>
+                                                                        {!notification.read && (
+                                                                            <div className="flex-shrink-0 ml-2">
+                                                                                <span className="block h-2 w-2 rounded-full bg-indigo-600"></span>
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+                                                                </a>
+                                                            )}
+                                                        </Menu.Item>
+                                                    ))
+                                                ) : (
+                                                    <div className="px-4 py-8 text-center">
+                                                        <BellIcon className="mx-auto h-12 w-12 text-gray-400" />
+                                                        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                                                            No notifications yet
+                                                        </p>
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            {/* Footer */}
+                                            {notifications.length > 0 && (
+                                                <div className="border-t border-gray-200 dark:border-gray-700">
+                                                    <a
+                                                        href="#"
+                                                        className="block px-4 py-2 text-center text-sm text-indigo-600 dark:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                                                    >
+                                                        View all notifications
+                                                    </a>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </Menu.Items>
+                                </Transition>
+                            </Menu>
                             
                             {/* Profile dropdown */}
                             <Menu as="div" className="relative">
