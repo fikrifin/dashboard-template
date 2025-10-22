@@ -15,6 +15,7 @@ import {
     SunIcon,
     MoonIcon,
     SwatchIcon,
+    SparklesIcon,
 } from '@heroicons/react/24/outline';
 import { Menu, Transition } from '@headlessui/react';
 
@@ -95,6 +96,7 @@ export default function DashboardLayout({ header, children }: PropsWithChildren<
         { name: 'Users', href: route('users.index'), icon: UsersIcon },
         { name: 'Components', href: route('components.index'), icon: SwatchIcon },
         { name: 'Charts', href: route('charts.index'), icon: ChartBarIcon },
+        { name: 'Icons', href: route('icons.index'), icon: SparklesIcon },
         { name: 'Settings', href: route('settings.index'), icon: CogIcon },
     ];
 

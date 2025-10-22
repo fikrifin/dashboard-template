@@ -37,6 +37,11 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Charts');
     })->name('charts.index');
     
+    // Icons Showcase
+    Route::get('/icons', function () {
+        return Inertia::render('Icons');
+    })->name('icons.index');
+    
     // Settings
     Route::get('/settings', function () {
         return Inertia::render('Settings');
